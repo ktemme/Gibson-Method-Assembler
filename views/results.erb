@@ -1,0 +1,22 @@
+<h1>Sorted parts</h1>
+<% @parts.each_with_index do |part,id| %>
+	<div class="detail">
+	<% part.map{|key,value| %>
+		<% unless key == 'sequence' %>
+			<%= "#{key} : #{value}<br/>" %>
+		<% else %>
+			<%= "#{key} : #{reversecomplement(value)}<br/>" %>
+		<% end %>
+	<% } %>
+	</div>
+<% end %>
+<br/>
+<h3>Primers</h3>
+<% @primers.each_with_index do |primer,id| %>
+	<%= "#{id+1} forward:\t#{primer.first}" %><br/>
+	<%= "#{id+1} reverse:\t#{primer.last}" %><br/>
+<% end %>
+<h3>Full Sequence</h3>
+<textarea cols="100" rows="75">
+	<%= @full %>
+</textarea>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title><%= @title || 'CAD for Venter cloning method' %></title>
+  <style>
+    html {
+      background-color: #eee;
+    }
+    .snippet {
+      margin: 5px;
+    }
+    .snippet textarea, .snippet .sbody {
+      border: 5px dotted #eee;
+      padding: 5px;
+      width: 700px;
+      color: #fff;
+      background-color: #333;
+    }
+    .snippet textarea {
+      padding: 20px;
+    }
+    .snippet input, .snippet .sdate {
+      margin-top: 5px;
+    }
+    div.detail {
+      border: 1px solid #333;
+      margin: 10px;
+      padding: 5px;
+    }
+ </style>
+ <script type='text/javascript' src='javascript/jquery-1.3.2.js'></script>
+ <script type='text/javascript'>
+	function addFormField() {
+		var id = document.getElementById("partsCount").value;
+		$("#parts").append("<div id='part" + id + "'> Name: <input type='text' name='parts[" + id + "][name]' /> Sequence: <input type='text' name='parts[" + id + "][sequence]' size='75'/> <a href='#' onClick='removeFormField(\"#part" + id + "\");return false;'>Remove</a><br/>RC: <input type='checkbox' name='parts[" + id + "][rc]' /> Order: <input type='text' name='parts[" + id + "][order]' /></div>");
+		id = (id-1)+2;
+		document.getElementById("partsCount").value = id;
+	}
+	function removeFormField(id) {
+		$(id).remove();
+	}
+ </script>
+</head>
+<body>
+  <%= yield %>
+</body>
+</html>
