@@ -3,13 +3,14 @@ require 'rubygems'
 require 'sinatra'
 
 
-set :environment, ENV['RACK_ENV']
+set :run, false
+set :env, :production
+set :raise_errors, true
+set :root, File.dirname(__FILE__)
 
-Sinatra::Application.default_options.merge!(
-  :run => false,
-  :env => :production
-)
-
+log = File.new("sinatra.log", "a+")
+STDOUT.reopen(log)
+STDERR.reopen(log)
 
 require 'server.rb'
-run Sinatra.application
+run Sinatra::Application

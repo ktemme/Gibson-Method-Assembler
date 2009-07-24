@@ -39,21 +39,27 @@ def annotatedSequence(parts)
 end
 
 def forward_primer(partID,parts)
+  p parts
 # Expects an integer and an array of hashed parts [{part data},{part data},{part data}]
-  prime = parts[partID-1]['sequence']
-  part = parts[partID]['sequence']
-  primer = prime[prime.size-20..prime.size] + part[0..39]
+  prime = parts[partID-1]['fullsequence']
+  part = parts[partID]['shortsequence']
+  prefix = parts[partID]['fixedprefix'] ||= ''
+  p prime
+  p part
+  p prefix
+  primer = prime[prime.size-20..prime.size] + prefix + part[0..39]
 end
 
 def reverse_primer(partID,parts)
 # Expects an integer and an array of hashed parts [{part data},{part data},{part data}]
   if (partID+2 > parts.size)
-     prime = parts[0]['sequence']
+     prime = parts[0]['fullsequence']
   else
-     prime = parts[partID+1]['sequence']
+     prime = parts[partID+1]['fullsequence']
   end
-  part = parts[partID]['sequence']
-  primer = reversecomplement(part[part.size-40..part.size]+prime[0..19])
+  part = parts[partID]['shortsequence']
+  suffix = parts[partID]['fixedsuffix'] ||= ''
+  primer = reversecomplement(part[part.size-40..part.size]+suffix+prime[0..19])
 end
 
 def findPrimers(parts)

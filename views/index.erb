@@ -1,12 +1,16 @@
-<h1>Primer design tool for the Venter cloning method</h1> 
+<h1>Primer design tool for the Gibson cloning method</h1> 
 <h3>Step 1: Enter part information</h3>
 
-<form action='upload' method='post'> 
+<form action='<%= url_for "/upload" %>' method='post'> 
 	<input type="hidden" id="partsCount" value="2">
 	<div id='parts'>
 		<div id='part1'>
 		  	Name: <input type="text" name='parts[1][name]' />
+			Prefix: <input type="text" name='parts[1][prefix]' size='50' />
+			<br/>
 		  	Sequence: <input type="text" name='parts[1][sequence]' size='75'/>
+			<br/>
+			Suffix: <input type="text" name='parts[1][suffix]' size='50' />
 			<br/>
 			RC: <input type='checkbox' name='parts[1][rc]' />
 			Order: <input type='text' name='parts[1][order]' />
