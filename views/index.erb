@@ -2,7 +2,8 @@
 <h3>Step 1: Enter part information</h3>
 
 <form action='<%= url_for "/upload" %>' method='post'> 
-	<input type="hidden" id="partsCount" value="2">
+	<input type="hidden" id="partsCount" value="2" />
+	<input type="hidden" id="partsOrder" name="partsOrder" value="" />
 	<div id='parts'>
 		<div id='parts_1' class='part'>
 			<div class='handle'></div>
@@ -25,11 +26,9 @@
 				</div>
 				<br/>
 				RC: <input type='checkbox' name='parts[1][rc]' />
-				Order: <input type='text' name='parts[1][order]' />
 			</div>
 		</div>
 	</div>
 	<div><a href="#" onClick="addFormField(); return false;">Add another part</a></div>
-	<a href="#" id="return">return values</a>
-	<div><input type='submit'/></div>
+	<div><input id="submit" type='submit'/></div>
 </form>

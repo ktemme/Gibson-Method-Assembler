@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'primer_design'
 require 'ape'
+require 'cgi'
 
 # gem 'wbzyl-sinatra-static-assets'
 require 'sinatra/static_assets'
@@ -24,6 +25,12 @@ post '/upload' do
   
   # first, convert the params hash into an array of parts objects
   @parts = params[:parts].map{|key,value| value}
+  
+  order = CGI.parse(params[:partsOrder])
+  
+  order['parts[]'].each_with_index do |value,index|
+    @parts[index]['order'] = value
+  end
   
   @parts.each {|x| x['prefix'] ||= '' }
   @parts.each {|x| x['suffix'] ||= '' }

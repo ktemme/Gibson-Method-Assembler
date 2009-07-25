@@ -8,8 +8,8 @@ function enableSortable() {
 	$("#parts").sortable({
 		handle: '.handle'
 	});
-	$("a#return").bind("click",function() {    
-      alert($('#parts').sortable('serialize'));  
+	$("#submit").bind("click",function() {    
+      $('#partsOrder').val($('#parts').sortable('serialize'));  
     });
 };
 
@@ -63,13 +63,12 @@ function addFormField() {
 					</div> \
 					<br/> \
 					RC: <input type='checkbox' name='parts["+id+"][rc]' /> \
-					Order: <input type='text' name='parts["+id+"][order]' /> \
 				</div> \
 			</div>"	
 		);
 
-	enablePrefixClick('#part'+id+' >');
-	enableSuffixClick('#part'+id+' >');
+	enablePrefixClick('#parts_'+id+' > .content > ');
+	enableSuffixClick('#parts_'+id+' > .content > ');
 
 	id = (id-1)+2;
 	document.getElementById("partsCount").value = id;
