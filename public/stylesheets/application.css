@@ -1,9 +1,9 @@
 .part {
+	float: left;
 	border: 1px solid #999;
 	font-family: Arial, Sans-Serif;
     font-size: 13px;
     background-color: #d6e5f4;
-    padding: 10px;
 }
 
 .prefix .data {
@@ -35,4 +35,20 @@
 
 .sequence {
 	
+}
+
+.handle {
+	height: 20px;
+	background-color: #1D89F4;
+}
+
+.content {
+    padding: 10px;	
+}
+
+#resultarea {
+	border: 1px solid #ccc;
+	width: 300px;
+	height: 200px;
+	float: left;
 }

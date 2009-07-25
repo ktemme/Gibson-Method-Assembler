@@ -29,20 +29,11 @@
     }
  </style>
 <%= stylesheet_link_tag "/stylesheets/application.css" %>
+<%= stylesheet_link_tag "/stylesheets/smoothness/jquery-ui-1.7.2.custom.css" %>
 <%= javascript_script_tag "/javascript/jquery-1.3.2.js" %>
+<%= javascript_script_tag "/javascript/jquery-ui-1.7.2.custom.min.js" %>
 <%= javascript_script_tag "/javascript/application.js" %>
 
- <script type='text/javascript'>
-	function addFormField() {
-		var id = document.getElementById("partsCount").value;
-		$("#parts").append("<div id='part" + id + "'> Name: <input type='text' name='parts[" + id + "][name]' /> <br/>Prefix: <input type='text' name='parts[" + id + "][prefix]' size='50'/> <br/>Sequence: <input type='text' name='parts[" + id + "][sequence]' size='75'/> <br/>Suffix: <input type='text' name='parts[" + id + "][suffix]' size='50'/> <a href='#' onClick='removeFormField(\"#part" + id + "\");return false;'>Remove</a><br/>RC: <input type='checkbox' name='parts[" + id + "][rc]' /> Order: <input type='text' name='parts[" + id + "][order]' /></div>");
-		id = (id-1)+2;
-		document.getElementById("partsCount").value = id;
-	}
-	function removeFormField(id) {
-		$(id).remove();
-	}
- </script>
 </head>
 <body>
   <%= yield %>

@@ -4,28 +4,32 @@
 <form action='<%= url_for "/upload" %>' method='post'> 
 	<input type="hidden" id="partsCount" value="2">
 	<div id='parts'>
-		<div id='part1' class='part'>
-		  	Name: <input type="text" name='parts[1][name]' class='field name' />
-			<div class='prefix'>
-				<div class = 'control'>+Prefix</div>
-				<div class = 'data'>Prefix: 
-					<input type="text" name='parts[1][prefix]' class='field additional_sequence' />
+		<div id='parts_1' class='part'>
+			<div class='handle'></div>
+			<div class='content'>
+			  	Name: <input type="text" name='parts[1][name]' class='field name' />
+				<div class='prefix'>
+					<div class = 'control'>+Prefix</div>
+					<div class = 'data'>Prefix: 
+						<input type="text" name='parts[1][prefix]' class='field additional_sequence' />
+					</div>
 				</div>
-			</div>
-			<div class='sequence'>
-		  		Sequence: <input type="text" name='parts[1][sequence]' class='field sequence'/>
-			</div>
-			<div class ='suffix'>
-				<div class='control'>+Suffix</div>
-				<div class='data'>Suffix: 
-					<input type="text" name='parts[1][suffix]' class='field additional_sequence' size='50' />	
+				<div class='sequence'>
+			  		Sequence: <input type="text" name='parts[1][sequence]' class='field sequence'/>
 				</div>
+				<div class ='suffix'>
+					<div class='control'>+Suffix</div>
+					<div class='data'>Suffix: 
+						<input type="text" name='parts[1][suffix]' class='field additional_sequence' size='50' />	
+					</div>
+				</div>
+				<br/>
+				RC: <input type='checkbox' name='parts[1][rc]' />
+				Order: <input type='text' name='parts[1][order]' />
 			</div>
-			<br/>
-			RC: <input type='checkbox' name='parts[1][rc]' />
-			Order: <input type='text' name='parts[1][order]' />
 		</div>
 	</div>
 	<div><a href="#" onClick="addFormField(); return false;">Add another part</a></div>
+	<a href="#" id="return">return values</a>
 	<div><input type='submit'/></div>
 </form>
