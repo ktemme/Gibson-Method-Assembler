@@ -19,6 +19,21 @@ get '/?' do
   erb :index
 end
 
+post '/download' do
+  # This requires a form to pass a plasmid like so:
+  # :construct
+  #   :sequence
+  #   :part[]
+  #     :start
+  #     :end
+  #     :name
+  
+  @construct = params[:construct]
+  mime :ape, 'text/ape'
+  attachment('construct.ape')
+  erb :ape, {:layout => :none}
+end
+
 post '/upload' do
   # params[:parts] contains the uploaded parts
   # we want to design primers and return an annotated sequence file
@@ -64,9 +79,6 @@ post '/upload' do
   erb :results
 end
 
-get '/download' do
-  send_data render_ape(params[:parts]), :filename => 'assembled.ape'
-end
 
 # http://sinatra.rubyforge.org/api/classes/Sinatra/Streaming.html
 # response.headers['Content-Type'] = 'text/csv' # I've also seen this for CSV files: 'text/csv; charset=iso-8859-1; header=present'

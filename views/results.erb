@@ -17,6 +17,17 @@
 	<%= "#{id+1} reverse:\t#{primer.last}" %><br/>
 <% end %>
 <h3>Full Sequence</h3>
-<textarea cols="100" rows="75">
+<form id="ape" action='<%= url_for "/download" %>' method='post'> 
+	<input type="hidden" name="construct[sequence]" value="<%= @full %>">
+	<% total_size = 0 %>
+	<% @parts.each_with_index do |part,id| %>
+		<input type="hidden" name="construct[parts][<%= id+1 %>][name]" value="<%= part['name'] %>">
+		<input type="hidden" name="construct[parts][<%= id+1 %>][start]" value="<%= total_size + 1 %>">
+		<input type="hidden" name="construct[parts][<%= id+1 %>][end]" value="<%= total_size + part['fullsequence'].size %>">
+		<% total_size += part['fullsequence'].size %>
+	<% end %>
+	<a href="javascript:submitForm()">Download ApE file</a>
+</form>
+<textarea cols="100" rows="25">
 	<%= @full %>
 </textarea>

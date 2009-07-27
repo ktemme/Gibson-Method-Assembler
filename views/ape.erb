@@ -1,0 +1,50 @@
+<%= format("LOCUS       %s %+11s bp ds-DNA     %-8s %-3s %-11s\n", 
+      "", 
+      @construct['sequence'].size.to_s, 
+      "circular", 
+      "", 
+      Date.today) %>
+DEFINITION
+ACCESSION
+VERSION
+SOURCE
+ORGANISM
+COMMENT
+COMMENT     ApEinfo:methylated:1
+FEATURES             Location/Qualifiers
+<% @construct['parts'].each do |part_data|
+  part = part_data[1]
+  if part['start'].to_i > part['end'].to_i then
+    loc = "complement(" + part['end'] + ".." + part['start'] + ")"
+  else
+    loc = part['start'] + ".." + part['end']
+  end
+%>
+
+<%= format("     %-16s%s\n", 'Part', loc) %>
+                     /label=<%= part['name'] %>
+                     /ApEinfo_fwdcolor=<%= random_hex() %>
+                     /ApEinfo_revcolor=<%= random_hex() %>
+
+<%
+end 
+%>
+ORIGIN
+<% 
+i = 0
+while i < @construct['sequence'].size
+%>
+<%= format("%+9s %s %s %s %s %s %s\n", 
+          i+1,
+          @construct['sequence'][i..i+9], 
+          @construct['sequence'][i+10..i+19], 
+          @construct['sequence'][i+20..i+29], 
+          @construct['sequence'][i+30..i+39], 
+          @construct['sequence'][i+40..i+49], 
+          @construct['sequence'][i+50..i+59])
+%>
+<% 
+i += 60 
+end 
+%>
+//

@@ -39,14 +39,14 @@ def annotatedSequence(parts)
 end
 
 def forward_primer(partID,parts)
-  p parts
+  # p parts
 # Expects an integer and an array of hashed parts [{part data},{part data},{part data}]
   prime = parts[partID-1]['fullsequence']
   part = parts[partID]['shortsequence']
   prefix = parts[partID]['fixedprefix'] ||= ''
-  p prime
-  p part
-  p prefix
+  # p prime
+  # p part
+  # p prefix
   primer = prime[prime.size-20..prime.size] + prefix + part[0..39]
 end
 

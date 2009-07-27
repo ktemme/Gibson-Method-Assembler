@@ -77,3 +77,7 @@ function addFormField() {
 function removeFormField(id) {
 	$(id).remove();
 };
+
+function submitForm() {
+	$("#ape").submit();
+};
