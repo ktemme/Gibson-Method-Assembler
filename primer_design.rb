@@ -65,7 +65,7 @@ end
 def findPrimers(parts)
   result = Array.new
   parts.each_with_index do |part,id|
-    result << [forward_primer(id,parts),reverse_primer(id,parts)]
+    result << [part['name'],forward_primer(id,parts),reverse_primer(id,parts)]
   end
   result
 end

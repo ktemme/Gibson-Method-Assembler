@@ -32,3 +32,16 @@
 	<div><a href="#" onClick="addFormField(); return false;">Add another part</a></div>
 	<div><input id="submit" type='submit'/></div>
 </form>
+
+<a href="javascript:submitSampleForm()">See a sample</a>
+<form id="sample" action='<%= url_for "/upload" %>' method="post">
+	<input type="hidden" name="partsOrder" value="parts[]=1&parts[]=2">
+	<input type="hidden" name="parts[1][name]" value="tet">
+	<input type="hidden" name="parts[1][prefix]" value="">
+	<input type="hidden" name="parts[1][sequence]" value="cggcgataatggcctgcttctcgccgaaacgtttggtggcgggaccagtgacgaaggcttgagcgagggcgtgcaagattccgaataccgcaagcgacaggccgatcatcgtcgcgctccagcgaaagcggtcctcgccgaaaatgacccagagcgctgccggcacctgtcctacgagttgcatgataaagaagacagtcataagtgcggcgacgatagtcatgccccgcgcccaccggaaggagctgactgggttgaaggctctcaagggcatcggcggagcttatcgactgcacggtgcaccaatgcttctggcgtcaggcagccatcggaagctgtggtatggctgtgcaggtcgtaaatcactgcataattcgtgtcgctcaaggcgcactcccgttctggataatgttttttgcgccgacatcataacggttctggcaaatattctgaaatgagctgttgacaattaatcatcggctcgtataatgtgtggaattgtgagcggataacaatttactagag">
+	<input type="hidden" name="parts[1][suffix]" value="">
+	<input type="hidden" name="parts[2][name]" value="gene J">
+	<input type="hidden" name="parts[2][prefix]" value="attaaagaggagaaattaagc">
+	<input type="hidden" name="parts[2][sequence]" value="ATGAAAACTATGGACGGTAACGCTGCGGCTGCATGGATTAGCTACGCCTTTACCGAAGTGGCTGCGATCTACCCGATTACGCCGAGCACCCCGATGGCGGAAAATGTGGACGAATGGGCTGCGCAGGGCAAGAAGAACCTCTTCGGCCAGCCGGTGCGCCTGATGGAGATGCAGTCGGAAGCGGGTGCAGCAGGTGCTGTGCATGGCGCCTTGCAAGCTGGCGCACTGACGACCACCTACACCGCGTCGCAGGGCCTGTTGCTGATGATCCCAAACATGTACAAAATCGCGGGTGAACTGCTGCCGGGTGTCTTTCATGTTTCGGCACGCGCACTGGCCACCAATAGCCTCAACATCTTTGGCGATCATCAGGATGTAATGGCGGTGCGCCAAACGGGCTGCGCGATGTTGGCCGAGAATAACGTCCAGCAAGTTATGGATTTGTCCGCGGTAGCCCACTTGGCAGCGATCAAAGGTCGCATTCCGTTCGTGAACTTCTTCGATGGCTTTCGCACCAGCCACGAAATCCAGAAGATCGAGGTTCTGGAATATGAACAGCTGGCCACCTTGTTGGATCGTCCGGCCCTGGACAGCTTCCGCCGTAACGCCCTTCACCCGGACCACCCGGTCATCCGTGGCACCGCCCAGAACCCGGACATCTACTTCCAGGAACGTGAGGCCGGTAACCGTTTCTATCAGGCGCTCCCGGATATTGTGGAATCTTACATGACCCAGATTTCTGCCCTGACTGGTCGCGAGTATCACCTGTTTAACTACACTGGTGCTGCGGATGCGGAGCGCGTGATCATCGCGATGGGCTCTGTCTGTGACACCGTCCAAGAGGTGGTTGACACGCTGAATGCAGCGGGTGAGAAAGTTGGTCTGCTCTCCGTTCATCTTTTCCGCCCGTTTTCGTTAGCGCACTTCTTCGCCCAACTGCCGAAAACTGTACAGCGTATCGCAGTATTGGACCGTACGAAAGAGCCAGGTGCTCAAGCAGAGCCGCTGTGCCTCGATGTGAAGAATGCCTTTTACCACCATGACGATGCCCCGTTGATTGTGGGTGGTCGCTATGCCTTGGGCGGTAAGGACGTGTTGCCGAACGATATTGCGGCCGTGTTTGATAACCTGAACAAACCGCTGCCGATGGACGGCTTCACGCTGGGTATCGTGGACGATGTTACCTTCACCTCTCTCCCGCCAGCGCAGCAGACCCTGGCGGTTTCTCACGACGGCATCACGGCATGTAAGTTTTGG">
+	<input type="hidden" name="parts[2][suffix]" value="">
+</form>

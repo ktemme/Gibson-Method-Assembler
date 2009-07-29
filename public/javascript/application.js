@@ -6,7 +6,9 @@ $(document).ready(function() {
 
 function enableSortable() {
 	$("#parts").sortable({
-		handle: '.handle'
+		cursor: 'move',
+		handle: '.handle',
+		cancel: '.delete'
 	});
 	$("#submit").bind("click",function() {    
       $('#partsOrder').val($('#parts').sortable('serialize'));  
@@ -43,7 +45,7 @@ function addFormField() {
 	var id = document.getElementById("partsCount").value;
 	$("#parts").append(
 			"<div id='parts_"+id+"' class='part'> \
-				<div class='handle'><a href='#' onClick='removeFormField(\"#part" + id + "\");return false;'>Remove</a></div> \
+				<div class='handle'><a class='delete' href='#' onClick='removeFormField(\"#parts_" + id + "\");return false;'>Remove</a></div> \
 				<div class='content'> \
 								  	Name: <input type='text' name='parts["+id+"][name]' class='field name' /> \
 					<div class='prefix'> \
@@ -80,4 +82,8 @@ function removeFormField(id) {
 
 function submitForm() {
 	$("#ape").submit();
+};
+
+function submitSampleForm() {
+	$("#sample").submit();
 };

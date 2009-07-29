@@ -34,7 +34,7 @@
 }
 
 .sequence {
-	
+	width: 300px;
 }
 
 .handle {
@@ -51,4 +51,39 @@
 	width: 300px;
 	height: 200px;
 	float: left;
+}
+
+html {
+  background-color: #eee;
+}
+.snippet {
+  margin: 5px;
+}
+.snippet textarea, .snippet .sbody {
+  border: 5px dotted #eee;
+  padding: 5px;
+  width: 700px;
+  color: #fff;
+  background-color: #333;
+}
+.snippet textarea {
+  padding: 20px;
+}
+.snippet input, .snippet .sdate {
+  margin-top: 5px;
+}
+div.detail {
+  border: 1px solid #333;
+  margin: 10px;
+  padding: 5px;
+}
+
+.header {
+	font-size: 1.5em;
+	font-family: Arial, Sans-Serif;
+}
+
+.results div {
+	display: block;
+	clear: both;
 }
