@@ -87,3 +87,7 @@ function submitForm() {
 function submitSampleForm() {
 	$("#sample").submit();
 };
+
+function partInfo() {
+	$.modal('<div>Hello</div>',{});
+};

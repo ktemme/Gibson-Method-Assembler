@@ -36,6 +36,7 @@
 	<div class='parts'>
 		<% @parts.each_with_index do |part,id| %>
 		<div id='parts_<%= id %>' class='part'>
+			<div><a href="javascript:partInfo()">Details</a></div>
 			<div class='handle'></div>
 			<div class='content'>
 			  	<div class='name'>
