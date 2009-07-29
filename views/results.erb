@@ -36,12 +36,13 @@
 	<div class='parts'>
 		<% @parts.each_with_index do |part,id| %>
 		<div id='parts_<%= id %>' class='part'>
-			<div><a href="javascript:partInfo()">Details</a></div>
-			<div class='handle'></div>
+			<div class='handle'>			
+				<div><a href="javascript:partInfo('#parts_<%= id %>_content')">Details</a></div>
+			</div>
 			<div class='content'>
-			  	<div class='name'>
-					Name: <%= part['name'] %>
-				</div>
+				<div class='name'><%= part['name'] %></div>
+			</div>
+			<div id='parts_<%= id %>_content' style='display: none;'>
 				<div class='sequence'>
 			  		Sequence: 
 					<textarea cols="40" rows="10"><%= part['fullsequence'] %></textarea>

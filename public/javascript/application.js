@@ -88,6 +88,6 @@ function submitSampleForm() {
 	$("#sample").submit();
 };
 
-function partInfo() {
-	$.modal('<div>Hello</div>',{});
+function partInfo(id) {
+	$.modal($(id),{});
 };
