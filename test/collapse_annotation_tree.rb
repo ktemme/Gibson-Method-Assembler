@@ -41,3 +41,5 @@ features.each do |feature|
   annotations << locate_feature_in_template(sequence,feature[:sequence])
 end
 annotations.flatten!
+
+

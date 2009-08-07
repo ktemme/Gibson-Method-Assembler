@@ -1,3 +1,9 @@
+# http://codesnippets.joyent.com/posts/show/849
+ENV['TEMP'] = Dir.pwd
+ENV['TMP'] = Dir.pwd
+SCRIPT_ROOT = File.dirname(__FILE__)
+
+
 # def sortParts(hashedParts)
 #   parts = hashedParts.map{|key,value| value}
 #   parts.sort{|a,b| a['order'] <=> b['order']}
@@ -85,9 +91,6 @@ end
 def findSequencingPrimers(seq, junctionArray)
   require 'tempfile'
   
-  # http://codesnippets.joyent.com/posts/show/849
-  ENV['TEMP'] = Dir.pwd
-  ENV['TMP'] = Dir.pwd
 
   result = Array.new
 
@@ -96,13 +99,15 @@ def findSequencingPrimers(seq, junctionArray)
       wrapped_seq = seq[500..seq.size-1]+seq[0..499]
       
       # Need to wrap the sequence around at this point, and then find the last primer pair
-      tmpFil = Tempfile.new('data', 'tmp')
-      tFile = File.new(tmpFil.path, "w+")
-      tFile.puts "SEQUENCE=#{wrapped_seq}\nTARGET=#{junction-500},100\nPRIMER_PRODUCT_SIZE_RANGE=500-1000\nPRIMER_NUM_RETURN=1\n="
-      tFile.close
+      # tmpFil = Tempfile.new('data', File.join(SCRIPT_ROOT,'tmp'))
+      tmpFil = File.join(SCRIPT_ROOT,'tmp',Time.now.to_i.to_s)
+      # tFile = File.new(tmpFil.path, "w+")
+      out = File.open(tmpFil, 'w')
+        out.puts "SEQUENCE=#{wrapped_seq}\nTARGET=#{junction-500},100\nPRIMER_PRODUCT_SIZE_RANGE=500-1000\nPRIMER_NUM_RETURN=1\n="
+      out.close
       sleep 3
   
-      cmdline = "/Users/ktemme/Code/primer3/bin/primer3_core < #{tmpFil.path}"
+      cmdline = "/Users/ktemme/Code/primer3/bin/primer3_core < #{tmpFil}"
       data = `#{cmdline}`.split"\n"  
 
       result << Hash.new
