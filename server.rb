@@ -29,7 +29,7 @@ post '/download' do
   #     :name
   
   @construct = params[:construct]
-  mime :ape, 'text/ape'
+  content_type 'text/ape'
   attachment('construct.ape')
   erb :ape, {:layout => :none}
 end
@@ -70,12 +70,23 @@ post '/upload' do
     end
   end
   
+  obj = Hash.new
+  obj['annotations'] = Array.new
+  @parts.each {|x| obj['annotations'] << {:sequence => x['fullsequence']}}
+
+  @formatted = format_annotated_sequence(obj,{ :size => 80, :delimiter => '<br/>'})
+  
   # fifth, determine the full sequence of the construction
   @full = @parts.map{|x| x['fullsequence'] }.join
 
   # sixth, calculate the primers needed
   @primers = findPrimers(@parts)
   
+  # add location to parts
+  @parts = addLocations(@parts)
+  
+  @sequencing = findSequencingPrimers(@full, @parts.map{|x| x['end']-50})
+
   erb :results
 end
 

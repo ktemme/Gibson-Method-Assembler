@@ -2,7 +2,7 @@
 	<div class='header'>
 		Cloning Primers
 	</div>
-	<div class='primers'>
+	<div class='primers monospace'>
 		<% @primers.each_with_index do |primer,id| %>
 			<%= "#{primer[0]} forward:\t#{primer[1]}" %><br/>
 			<%= "#{primer[0]} reverse:\t#{primer.last}" %><br/>
@@ -11,7 +11,11 @@
 	<div class='header'>
 		Sequencing Primers
 	</div>
-	<div>
+	<div class='monospace'>
+		<% @sequencing.each_with_index do |primers, id| %>
+			<%= "Junction #{id+1} forward: #{primers['PRIMER_LEFT_SEQUENCE']}" %><br/>
+			<%= "Junction #{id+1} reverse: #{primers['PRIMER_RIGHT_SEQUENCE']}" %><br/>
+		<% end %>
 	</div>
 	<div class='header'>
 		Sequence
@@ -28,7 +32,11 @@
 			<% end %>
 			<a href="javascript:submitForm()">Download ApE file</a>
 		</form>
-		<textarea cols="100" rows="25"><%= @full %></textarea>
+		<div class='monospace'>
+			<%= @formatted['annotations'].map{|x| 
+				"<span class='monospace' style='background-color: #{random_hex()};'>" + x[:delimited_sequence] + "</span>"
+				}.join %>
+		</div>
 	</div>
 	<div class='header'>
 		Parts
@@ -39,13 +47,21 @@
 			<div class='handle'>			
 				<div><a href="javascript:partInfo('#parts_<%= id %>_content')">Details</a></div>
 			</div>
-			<div class='content'>
+			<div class='results_content'>
 				<div class='name'><%= part['name'] %></div>
 			</div>
 			<div id='parts_<%= id %>_content' style='display: none;'>
 				<div class='sequence'>
+			  		Prefix: 
+					<textarea cols="40" rows="1"><%= part['prefix'] %></textarea>
+				</div>
+				<div class='sequence'>
 			  		Sequence: 
 					<textarea cols="40" rows="10"><%= part['fullsequence'] %></textarea>
+				</div>
+				<div class='sequence'>
+			  		Suffix: 
+					<textarea cols="40" rows="1"><%= part['suffix'] %></textarea>
 				</div>
 			</div>
 		</div>

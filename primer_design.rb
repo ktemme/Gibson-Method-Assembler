@@ -69,3 +69,111 @@ def findPrimers(parts)
   end
   result
 end
+
+def addLocations(parts)
+  total_size = 0
+	parts.each_with_index do |part,id| 
+
+		parts[id]['start'] = total_size + 1 
+		parts[id]['end'] = total_size + part['fullsequence'].size
+
+		total_size += part['fullsequence'].size
+	end
+end
+
+
+def findSequencingPrimers(seq, junctionArray)
+  require 'tempfile'
+  
+  # http://codesnippets.joyent.com/posts/show/849
+  ENV['TEMP'] = Dir.pwd
+  ENV['TMP'] = Dir.pwd
+
+  result = Array.new
+
+  junctionArray.each_with_index do |junction, index|
+    if index == junctionArray.size - 1
+      wrapped_seq = seq[500..seq.size-1]+seq[0..499]
+      
+      # Need to wrap the sequence around at this point, and then find the last primer pair
+      tmpFil = Tempfile.new('data', 'tmp')
+      tFile = File.new(tmpFil.path, "w+")
+      tFile.puts "SEQUENCE=#{wrapped_seq}\nTARGET=#{junction-500},100\nPRIMER_PRODUCT_SIZE_RANGE=500-1000\nPRIMER_NUM_RETURN=1\n="
+      tFile.close
+      sleep 3
+  
+      cmdline = "/Users/ktemme/Code/primer3/bin/primer3_core < #{tmpFil.path}"
+      data = `#{cmdline}`.split"\n"  
+
+      result << Hash.new
+      data.each do |value|
+        b,c = value.split('=')
+        if b == "PRIMER_LEFT_SEQUENCE" || b == "PRIMER_RIGHT_SEQUENCE"
+          result[index][b] = c
+        end
+      end
+      
+      
+    else 
+      tmpFil = Tempfile.new('data', 'tmp')
+      tFile = File.new(tmpFil.path, "w+")
+      tFile.puts "SEQUENCE=#{seq}\nTARGET=#{junction},100\nPRIMER_PRODUCT_SIZE_RANGE=500-1000\nPRIMER_NUM_RETURN=1\n="
+      tFile.close
+      sleep 3
+  
+      cmdline = "/Users/ktemme/Code/primer3/bin/primer3_core < #{tmpFil.path}"
+      data = `#{cmdline}`.split"\n"  
+
+      result << Hash.new
+      data.each do |value|
+        b,c = value.split('=')
+        if b == "PRIMER_LEFT_SEQUENCE" || b == "PRIMER_RIGHT_SEQUENCE"
+          result[index][b] = c
+        end
+      end
+    end
+  end
+  
+  result
+end
+
+
+def format_annotated_sequence(object,args={})
+  size = args['size'] || 80
+  delimiter = args['delimiter'] || '<br/>'
+  
+  # We expect sequence to be an object that contains an array of annotations
+  # Each annotation is a hash with a 'sequence' attribute
+  # This method adds a 'delimited_sequence' attribute to each annotation
+  
+  a = 0
+  b = size - 1
+  carry = 0
+  
+  object['annotations'].each do |annotation|
+    seq = annotation[:sequence]
+    annotation[:delimited_sequence] = ''
+        
+    while b < seq.size
+      annotation[:delimited_sequence] += seq[a..b] + delimiter
+      a = b + 1 
+      b += size
+    end
+
+    annotation[:delimited_sequence] += seq[a..b]
+    tail = seq[a..b].size
+
+    if tail == seq.size  # Everything fit onto the current line
+      carry += tail
+    else # Reset the carry flag
+      carry = tail
+    end
+
+    # p "Tail: #{tail} and Length: #{seq.size}, next part on this line: #{b-a+1}"
+    a = 0
+    b = size - carry - 1
+    
+  end
+  
+  object
+end
