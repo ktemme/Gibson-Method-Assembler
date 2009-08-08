@@ -1,3 +1,5 @@
+require 'enumerator'
+
 def molar_concentration(args={})
   (args[:conc].to_i*1e6/660/args[:size].to_i).round
 end
