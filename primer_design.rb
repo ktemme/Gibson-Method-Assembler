@@ -89,8 +89,9 @@ end
 
 
 def findSequencingPrimers(seq, junctionArray)
-  require 'tempfile'
-  
+  # require 'tempfile'
+  ENV['PATH'] += ':/Users/ktemme/Code/primer3/bin'
+  p ENV['PATH']
 
   result = Array.new
 
@@ -107,7 +108,7 @@ def findSequencingPrimers(seq, junctionArray)
       out.close
       sleep 3
   
-      cmdline = "/Users/ktemme/Code/primer3/bin/primer3_core < #{tmpFil}"
+      cmdline = "primer3_core < #{tmpFil}"
       data = `#{cmdline}`.split"\n"  
 
       result << Hash.new
@@ -120,13 +121,14 @@ def findSequencingPrimers(seq, junctionArray)
       
       
     else 
-      tmpFil = Tempfile.new('data', 'tmp')
-      tFile = File.new(tmpFil.path, "w+")
-      tFile.puts "SEQUENCE=#{seq}\nTARGET=#{junction},100\nPRIMER_PRODUCT_SIZE_RANGE=500-1000\nPRIMER_NUM_RETURN=1\n="
-      tFile.close
+      tmpFil = File.join(SCRIPT_ROOT,'tmp',Time.now.to_i.to_s)
+      # tFile = File.new(tmpFil.path, "w+")
+      out = File.open(tmpFil, 'w')
+        out.puts "SEQUENCE=#{seq}\nTARGET=#{junction},100\nPRIMER_PRODUCT_SIZE_RANGE=500-1000\nPRIMER_NUM_RETURN=1\n="
+      out.close
       sleep 3
   
-      cmdline = "/Users/ktemme/Code/primer3/bin/primer3_core < #{tmpFil.path}"
+      cmdline = "primer3_core < #{tmpFil}"
       data = `#{cmdline}`.split"\n"  
 
       result << Hash.new
