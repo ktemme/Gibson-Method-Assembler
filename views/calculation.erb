@@ -1,0 +1,13 @@
+<h3>Mix Suggestions</h3>
+
+<% @parts.each_with_index do |part,i| %>
+	<h4><%= part['name'] %>:</h4>
+	<%= part['size'] %> bp
+	<%= part['conc'] %> ng/ul
+	<br/>Add: 
+	<b><%= @volumes[i] %> ul</b>
+	<br/>to get:
+	<%= @final_molarities[i] %> ng/ul
+	<br/><br/>
+<% end %>	
+	

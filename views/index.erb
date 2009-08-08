@@ -1,47 +1,70 @@
 <h1>Primer design tool for the Gibson cloning method</h1> 
-<h3>Step 1: Enter part information</h3>
 
-<form action='<%= url_for "/upload" %>' method='post'> 
-	<input type="hidden" id="partsCount" value="2" />
-	<input type="hidden" id="partsOrder" name="partsOrder" value="" />
-	<div id='parts'>
-		<div id='parts_1' class='part'>
-			<div class='handle'></div>
-			<div class='content'>
-			  	Name: <input type="text" name='parts[1][name]' class='field name' />
-				<div class='prefix'>
-					<div class = 'control'>+Prefix</div>
-					<div class = 'data'>Prefix: 
-						<input type="text" name='parts[1][prefix]' class='field additional_sequence' />
+<div id="step_1" class="section">
+
+	<h3>Step 1: Enter part information</h3>
+
+	<form action='<%= url_for "/upload" %>' method='post'> 
+		<input type="hidden" id="partsCount" value="2" />
+		<input type="hidden" id="partsOrder" name="partsOrder" value="" />
+		<div id='parts'>
+			<div id='parts_1' class='part'>
+				<div class='handle'></div>
+				<div class='content'>
+				  	Name: <input type="text" name='parts[1][name]' class='field name' />
+					<div class='prefix'>
+						<div class = 'control'>+Prefix</div>
+						<div class = 'data'>Prefix: 
+							<input type="text" name='parts[1][prefix]' class='field additional_sequence' />
+						</div>
 					</div>
-				</div>
-				<div class='sequence'>
-			  		Sequence: <input type="text" name='parts[1][sequence]' class='field sequence'/>
-				</div>
-				<div class ='suffix'>
-					<div class='control'>+Suffix</div>
-					<div class='data'>Suffix: 
-						<input type="text" name='parts[1][suffix]' class='field additional_sequence' size='50' />	
+					<div class='sequence'>
+				  		Sequence: <input type="text" name='parts[1][sequence]' class='field sequence'/>
 					</div>
+					<div class ='suffix'>
+						<div class='control'>+Suffix</div>
+						<div class='data'>Suffix: 
+							<input type="text" name='parts[1][suffix]' class='field additional_sequence' size='50' />	
+						</div>
+					</div>
+					<br/>
+					RC: <input type='checkbox' name='parts[1][rc]' />
 				</div>
-				<br/>
-				RC: <input type='checkbox' name='parts[1][rc]' />
 			</div>
 		</div>
-	</div>
-	<div><a href="#" onClick="addFormField(); return false;">Add another part</a></div>
-	<div><input id="submit" type='submit'/></div>
-</form>
+		<div><a href="#" onClick="addFormField('step_1'); return false;">Add another part</a></div>
+		<div><input id="submit" type='submit'/></div>
+	</form>
 
-<a href="javascript:submitSampleForm()">See a sample</a>
-<form id="sample" action='<%= url_for "/upload" %>' method="post">
-	<input type="hidden" name="partsOrder" value="parts[]=1&parts[]=2">
-	<input type="hidden" name="parts[1][name]" value="tet">
-	<input type="hidden" name="parts[1][prefix]" value="">
-	<input type="hidden" name="parts[1][sequence]" value="cggcgataatggcctgcttctcgccgaaacgtttggtggcgggaccagtgacgaaggcttgagcgagggcgtgcaagattccgaataccgcaagcgacaggccgatcatcgtcgcgctccagcgaaagcggtcctcgccgaaaatgacccagagcgctgccggcacctgtcctacgagttgcatgataaagaagacagtcataagtgcggcgacgatagtcatgccccgcgcccaccggaaggagctgactgggttgaaggctctcaagggcatcggcggagcttatcgactgcacggtgcaccaatgcttctggcgtcaggcagccatcggaagctgtggtatggctgtgcaggtcgtaaatcactgcataattcgtgtcgctcaaggcgcactcccgttctggataatgttttttgcgccgacatcataacggttctggcaaatattctgaaatgagctgttgacaattaatcatcggctcgtataatgtgtggaattgtgagcggataacaatttactagag">
-	<input type="hidden" name="parts[1][suffix]" value="">
-	<input type="hidden" name="parts[2][name]" value="gene J">
-	<input type="hidden" name="parts[2][prefix]" value="attaaagaggagaaattaagc">
-	<input type="hidden" name="parts[2][sequence]" value="ATGAAAACTATGGACGGTAACGCTGCGGCTGCATGGATTAGCTACGCCTTTACCGAAGTGGCTGCGATCTACCCGATTACGCCGAGCACCCCGATGGCGGAAAATGTGGACGAATGGGCTGCGCAGGGCAAGAAGAACCTCTTCGGCCAGCCGGTGCGCCTGATGGAGATGCAGTCGGAAGCGGGTGCAGCAGGTGCTGTGCATGGCGCCTTGCAAGCTGGCGCACTGACGACCACCTACACCGCGTCGCAGGGCCTGTTGCTGATGATCCCAAACATGTACAAAATCGCGGGTGAACTGCTGCCGGGTGTCTTTCATGTTTCGGCACGCGCACTGGCCACCAATAGCCTCAACATCTTTGGCGATCATCAGGATGTAATGGCGGTGCGCCAAACGGGCTGCGCGATGTTGGCCGAGAATAACGTCCAGCAAGTTATGGATTTGTCCGCGGTAGCCCACTTGGCAGCGATCAAAGGTCGCATTCCGTTCGTGAACTTCTTCGATGGCTTTCGCACCAGCCACGAAATCCAGAAGATCGAGGTTCTGGAATATGAACAGCTGGCCACCTTGTTGGATCGTCCGGCCCTGGACAGCTTCCGCCGTAACGCCCTTCACCCGGACCACCCGGTCATCCGTGGCACCGCCCAGAACCCGGACATCTACTTCCAGGAACGTGAGGCCGGTAACCGTTTCTATCAGGCGCTCCCGGATATTGTGGAATCTTACATGACCCAGATTTCTGCCCTGACTGGTCGCGAGTATCACCTGTTTAACTACACTGGTGCTGCGGATGCGGAGCGCGTGATCATCGCGATGGGCTCTGTCTGTGACACCGTCCAAGAGGTGGTTGACACGCTGAATGCAGCGGGTGAGAAAGTTGGTCTGCTCTCCGTTCATCTTTTCCGCCCGTTTTCGTTAGCGCACTTCTTCGCCCAACTGCCGAAAACTGTACAGCGTATCGCAGTATTGGACCGTACGAAAGAGCCAGGTGCTCAAGCAGAGCCGCTGTGCCTCGATGTGAAGAATGCCTTTTACCACCATGACGATGCCCCGTTGATTGTGGGTGGTCGCTATGCCTTGGGCGGTAAGGACGTGTTGCCGAACGATATTGCGGCCGTGTTTGATAACCTGAACAAACCGCTGCCGATGGACGGCTTCACGCTGGGTATCGTGGACGATGTTACCTTCACCTCTCTCCCGCCAGCGCAGCAGACCCTGGCGGTTTCTCACGACGGCATCACGGCATGTAAGTTTTGG">
-	<input type="hidden" name="parts[2][suffix]" value="">
-</form>
+	<a href="javascript:submitSampleForm()">See a sample</a>
+	<form id="sample" action='<%= url_for "/upload" %>' method="post">
+		<input type="hidden" name="partsOrder" value="parts[]=1&parts[]=2">
+		<input type="hidden" name="parts[1][name]" value="tet">
+		<input type="hidden" name="parts[1][prefix]" value="">
+		<input type="hidden" name="parts[1][sequence]" value="cggcgataatggcctgcttctcgccgaaacgtttggtggcgggaccagtgacgaaggcttgagcgagggcgtgcaagattccgaataccgcaagcgacaggccgatcatcgtcgcgctccagcgaaagcggtcctcgccgaaaatgacccagagcgctgccggcacctgtcctacgagttgcatgataaagaagacagtcataagtgcggcgacgatagtcatgccccgcgcccaccggaaggagctgactgggttgaaggctctcaagggcatcggcggagcttatcgactgcacggtgcaccaatgcttctggcgtcaggcagccatcggaagctgtggtatggctgtgcaggtcgtaaatcactgcataattcgtgtcgctcaaggcgcactcccgttctggataatgttttttgcgccgacatcataacggttctggcaaatattctgaaatgagctgttgacaattaatcatcggctcgtataatgtgtggaattgtgagcggataacaatttactagag">
+		<input type="hidden" name="parts[1][suffix]" value="">
+		<input type="hidden" name="parts[2][name]" value="gene J">
+		<input type="hidden" name="parts[2][prefix]" value="attaaagaggagaaattaagc">
+		<input type="hidden" name="parts[2][sequence]" value="ATGAAAACTATGGACGGTAACGCTGCGGCTGCATGGATTAGCTACGCCTTTACCGAAGTGGCTGCGATCTACCCGATTACGCCGAGCACCCCGATGGCGGAAAATGTGGACGAATGGGCTGCGCAGGGCAAGAAGAACCTCTTCGGCCAGCCGGTGCGCCTGATGGAGATGCAGTCGGAAGCGGGTGCAGCAGGTGCTGTGCATGGCGCCTTGCAAGCTGGCGCACTGACGACCACCTACACCGCGTCGCAGGGCCTGTTGCTGATGATCCCAAACATGTACAAAATCGCGGGTGAACTGCTGCCGGGTGTCTTTCATGTTTCGGCACGCGCACTGGCCACCAATAGCCTCAACATCTTTGGCGATCATCAGGATGTAATGGCGGTGCGCCAAACGGGCTGCGCGATGTTGGCCGAGAATAACGTCCAGCAAGTTATGGATTTGTCCGCGGTAGCCCACTTGGCAGCGATCAAAGGTCGCATTCCGTTCGTGAACTTCTTCGATGGCTTTCGCACCAGCCACGAAATCCAGAAGATCGAGGTTCTGGAATATGAACAGCTGGCCACCTTGTTGGATCGTCCGGCCCTGGACAGCTTCCGCCGTAACGCCCTTCACCCGGACCACCCGGTCATCCGTGGCACCGCCCAGAACCCGGACATCTACTTCCAGGAACGTGAGGCCGGTAACCGTTTCTATCAGGCGCTCCCGGATATTGTGGAATCTTACATGACCCAGATTTCTGCCCTGACTGGTCGCGAGTATCACCTGTTTAACTACACTGGTGCTGCGGATGCGGAGCGCGTGATCATCGCGATGGGCTCTGTCTGTGACACCGTCCAAGAGGTGGTTGACACGCTGAATGCAGCGGGTGAGAAAGTTGGTCTGCTCTCCGTTCATCTTTTCCGCCCGTTTTCGTTAGCGCACTTCTTCGCCCAACTGCCGAAAACTGTACAGCGTATCGCAGTATTGGACCGTACGAAAGAGCCAGGTGCTCAAGCAGAGCCGCTGTGCCTCGATGTGAAGAATGCCTTTTACCACCATGACGATGCCCCGTTGATTGTGGGTGGTCGCTATGCCTTGGGCGGTAAGGACGTGTTGCCGAACGATATTGCGGCCGTGTTTGATAACCTGAACAAACCGCTGCCGATGGACGGCTTCACGCTGGGTATCGTGGACGATGTTACCTTCACCTCTCTCCCGCCAGCGCAGCAGACCCTGGCGGTTTCTCACGACGGCATCACGGCATGTAAGTTTTGG">
+		<input type="hidden" name="parts[2][suffix]" value="">
+	</form>
+</div>
+
+<div id="step_2" class="section">
+	<h3>Step 2: Calculate reaction conditions</h3>
+
+	<form action='<%= url_for "/calculate" %>' method='post'>
+		<div id="calc_parts">
+		 	<div id='parts_1' class='part'>
+				<div class='handle'></div>
+				<div class='content'>
+				  	Name: <input type="text" name='parts[1][name]' class='field name' />
+				  	Size (bp): <input type="text" name='parts[1][size]' class='field name' />
+				  	Concentration (ng/ul): <input type="text" name='parts[1][conc]' class='field name' />				
+				</div>
+			</div>
+		</div>
+		<div><a href="#" onClick="addFormField('step_2'); return false;">Add another part</a></div>
+		<div><input id="submit" type='submit'/></div>
+	</form>
+</div>

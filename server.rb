@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'primer_design'
+require 'quantification'
 require 'ape'
 require 'cgi'
 
@@ -88,6 +89,17 @@ post '/upload' do
   @sequencing = findSequencingPrimers(@full, @parts.map{|x| x['end']-50})
 
   erb :results
+end
+
+post '/calculate' do
+  @parts = params[:parts].map{|key,value| value}
+
+  molarities = @parts.map{|x| molar_concentration({:conc => x['conc'], :size => x['size']})}
+  ratios = mix_ratios(molarities)
+  @volumes = volumes(ratios)
+  @final_molarities = final_molarities(@volumes,molarities)
+
+  erb :calculation
 end
 
 

@@ -110,3 +110,9 @@ div.detail {
 .monospace {
 	font-family: courier, monospace;
 }
+
+.section {
+	display: block;
+	clear: left;
+	padding: 50px;
+}
