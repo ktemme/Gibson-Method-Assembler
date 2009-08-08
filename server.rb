@@ -93,10 +93,13 @@ end
 
 post '/calculate' do
   @parts = params[:parts].map{|key,value| value}
-
+  p @parts
   molarities = @parts.map{|x| molar_concentration({:conc => x['conc'], :size => x['size']})}
+  p molarities
   ratios = mix_ratios(molarities)
+  p ratios
   @volumes = volumes(ratios)
+  p @volumes
   @final_molarities = final_molarities(@volumes,molarities)
 
   erb :calculation

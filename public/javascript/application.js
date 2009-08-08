@@ -79,7 +79,7 @@ function addFormField(location) {
 		document.getElementById("partsCount").value = id;
 	}
 	else if (location == 'step_2') {
-		var id = document.getElementById("partsCount").value;
+		var id = document.getElementById("partsCount2").value;
 		$("#calc_parts").append(
 				"<div id='parts_"+id+"' class='part'> \
 					<div class='handle'><a class='delete' href='#' onClick='removeFormField(\"#parts_" + id + "\");return false;'>Remove</a></div> \
@@ -92,7 +92,7 @@ function addFormField(location) {
 			);
 
 		id = (id-1)+2;
-		// document.getElementById("partsCount").value = id;		
+		document.getElementById("partsCount2").value = id;		
 	};
 };
 
