@@ -5,7 +5,7 @@ end
 def mix_ratios(input)
   result = []
   input.each do |m|
-    data = input.reduce(0.to_f) do |sum, value|
+    data = input.inject(0.to_f) do |sum, value|
       sum + m.to_f/value.to_f
     end
     result << data
