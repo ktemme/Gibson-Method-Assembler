@@ -11,7 +11,7 @@ function enableSortable() {
 		cancel: '.delete'
 	});
 	$("#submit").bind("click",function() {    
-		alert($('#parts').sortable('serialize'));
+		// alert($('#parts').sortable('serialize'));
       $('#partsOrder').val($('#parts').sortable('serialize'));  
     });
 };
