@@ -11,6 +11,7 @@ function enableSortable() {
 		cancel: '.delete'
 	});
 	$("#submit").bind("click",function() {    
+		alert($('#parts').sortable('serialize'));
       $('#partsOrder').val($('#parts').sortable('serialize'));  
     });
 };
@@ -51,6 +52,7 @@ function addFormField(location) {
 					<div class='handle'><a class='delete' href='#' onClick='removeFormField(\"#parts_" + id + "\");return false;'>Remove</a></div> \
 					<div class='content'> \
 									  	Name: <input type='text' name='parts["+id+"][name]' class='field name' /> \
+										<input type='hidden' name='parts["+id+"][number]' value='"+id+"' /> \
 						<div class='prefix'> \
 							<div class = 'control'>+Prefix</div> \
 							<div class = 'data'>Prefix: \

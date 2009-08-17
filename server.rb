@@ -43,8 +43,12 @@ post '/upload' do
   @parts = params[:parts].map{|key,value| value}
   
   order = CGI.parse(params[:partsOrder])
-  
+
+  @parts.sort! {|a,b| a['number'] <=> b['number']}
+
   order['parts[]'].each_with_index do |value,index|
+    # p value
+    # p index
     @parts[index]['order'] = value
   end
   
@@ -56,6 +60,8 @@ post '/upload' do
   
   # third, sort the parts based on the order parameter  
   @parts.sort! {|a,b| a['order'] <=> b['order']}
+  
+  # p @parts
   
   # fourth, reverse complement anything that needs to be. create 'shortsequence' 
   @parts.each do |x|
