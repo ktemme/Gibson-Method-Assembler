@@ -5,7 +5,7 @@ set :destination_dir, "/var/www/ruby/assembly"
 
 
 default_run_options[:pty] = true
-set :repository,  "git@github.com:ktemme/Gibson-Method-Assembler.git"
+set :repository,  "git@github-assembly:ktemme/Gibson-Method-Assembler.git"
 set :scm, "git"
 
 ssh_options[:forward_agent] = true
