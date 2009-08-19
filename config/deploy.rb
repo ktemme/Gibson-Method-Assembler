@@ -1,5 +1,5 @@
 # Voigtlab server configuration
-set :user, 'ktemme'  # DH account username
+set :user, 'ktemme'  # Voigtlab account username
 set :domain, 'voigtlab.ucsf.edu'  
 set :destination_dir, "/var/www/ruby/assembly"
 
