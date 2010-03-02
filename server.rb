@@ -41,10 +41,10 @@ post '/upload' do
   
   # first, convert the params hash into an array of parts objects
   @parts = params[:parts].map{|key,value| value}
-  
+  p @parts
   order = CGI.parse(params[:partsOrder])
 
-  @parts.sort! {|a,b| a['number'] <=> b['number']}
+  @parts.sort! {|a,b| a['number'].to_i <=> b['number'].to_i}
 
   order['parts[]'].each_with_index do |value,index|
     # p value
